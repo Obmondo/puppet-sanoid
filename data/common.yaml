@@ -36,6 +36,7 @@ sanoid::templates:
     autoprune: true
 
 sanoid::syncoid::enabled: true
+sanoid::syncoid::allow_ssh_from: []
 sanoid::syncoid::default_options:
   compress: 'lz4'
   no_sync_snap: true
