@@ -2,9 +2,11 @@
   "name": "obmondo-sanoid",
   "version": "0.1.0",
   "author": "Ashish Jaiswal",
-  "summary": "",
+  "summary": "Manage ZFS snapshot via sanoid in production",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/Obmondo/puppet-sanoid.git",
+  "project_page": "https://github.com/Obmondo/puppet-sanoid",
+  "issues_url": "https://github.com/Obmondo/puppet-sanoid/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
