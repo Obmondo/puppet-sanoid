@@ -3,6 +3,10 @@ class sanoid::syncoid (
   Sanoid::Syncoid::Options $default_options,
   Array[String]                 $allow_sync_from = $sanoid::allow_sync_from,
   Sanoid::Syncoid::Replications $replications    = $sanoid::replications,
+  # Local account that remote pullers authenticate as. Pairs with the `user`
+  # parameter of sanoid::syncoid::job on the pulling host. Defaults to `root`
+  # for backwards compatibility.
+  String[1]                     $sync_user       = 'root',
 ) {
 
   include systemd
@@ -25,7 +29,7 @@ class sanoid::syncoid (
 
     ssh_authorized_key { "syncoid ssh key from ${syncoid_pubkey_parts[2]}":
       ensure  => present,
-      user    => 'root',
+      user    => $sync_user,
       type    => $syncoid_pubkey_parts[0],
       key     => $syncoid_pubkey_parts[1],
       options => [

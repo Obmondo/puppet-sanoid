@@ -1,13 +1,18 @@
 # Sanoid Replication
 define sanoid::syncoid::job (
   Stdlib::Host                       $source,
+  # Account to ssh into on the source host. Defaults to `root` for backwards
+  # compatibility, but a dedicated user with `zfs allow -u <user> send,hold`
+  # on the source pool is preferable: it avoids depending on the source's
+  # `PermitRootLogin` policy, which commonly forbids or restricts root logins.
+  String[1]                          $user    = 'root',
   Boolean                            $enabled = true,
   Optional[Sanoid::Syncoid::Options] $options = undef,
 ) {
 
   $job_name = $title
   $_ensure = stdlib::ensure($enabled)
-  $_source = "${source}:${job_name}"
+  $_source = "${user}@${source}:${job_name}"
   $default_options = $sanoid::syncoid::default_options
 
   # Change the upgrade service timer timing.
